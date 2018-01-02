@@ -1,0 +1,68 @@
+<html lang="en" >
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">  
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">  
+</head>
+<body ng-app="imgCrwl" ng-cloak>  
+  <div ng-controller="AppCtrl" ng-cloak layout-gt-sm="row" layout="column">
+    <div flex-gt-md="50" flex>
+      
+      <md-toolbar layout-md="row" class="md-hue-3">
+        <div class="md-toolbar-tools">
+          <span>Image Crawler</span>
+        </div>
+      </md-toolbar>
+
+      <form name="urlcrwlForm" ng-submit="getRequest()">
+        <div layout="row" layout-xs="column" layout-sm="column" layout-align="space-between center">
+          <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>URL</label>
+              <input required name="url" ng-model="url" placeholder="http://www.blockonomics.co/" md-maxlength="100" ng-pattern="/^.+\..+\..+$/"/>
+              <div class="hint" ng-show="showHints">enter url to crawl</div>
+
+              <div ng-messages="urlcrwlForm.url.$error" ng-hide="showHints">
+                <div ng-message-exp="['required', 'maxlength', 'maxlength', 'pattern']">
+                  entered url must be valid form containing less than 50 characters.
+                </div>
+              </div>
+            </md-input-container>
+          </div>
+          <div layout-gt-sm="row">
+            <md-button md-no-ink class="md-raised md-primary" type="submit">Fetch Images</md-button>
+          </div>
+        </div>
+      </form>
+
+      <md-content>
+        <md-list flex>
+          <md-subheader class="md-no-sticky">List Items</md-subheader>          
+          <md-list-item class="md-3-line" ng-repeat="item in imagePath" ng-click="null">
+            <div class="md-list-item-text" layout="column">
+              <p><img ng-src="{{item.url}}" class="md-media-lg card-media" alt="{{item.index}}" /></p>
+              <p>{{item.notes}}</p>
+              <md-divider></md-divider>
+            </div>
+          </md-list-item>          
+        </md-list>
+      </md-content>
+
+    </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>  
+  <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>  
+  <script type="text/javascript" src="/app/imgCrwl.js"></script>
+  <style type="text/css">
+    .listdemoBasicUsage md-divider {
+      margin-top: 10px;
+      margin-bottom: 0;
+    }
+  </style>
+</body>
+</html>
+
+
